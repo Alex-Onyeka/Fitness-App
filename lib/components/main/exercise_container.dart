@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workouttracker/classes/exercise_class.dart';
+import 'package:workouttracker/classes/workout_class.dart';
 
 class ExerciseContainer extends StatefulWidget {
   final Function()? onTap;
@@ -102,17 +103,16 @@ class _ExerciseContainerState
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
                               ),
-                              widget.exercise.count == null
-                                  ? '${widget.exercise.duration} Mins'
-                                  : '${widget.exercise.count} Laps',
+
+                              convertSecondsToDays(
+                                widget.exercise.duration,
+                              ),
                             ),
                             Icon(
                               color: Colors.white,
                               size: 16,
-                              widget.exercise.count == null
-                                  ? Icons.timer_outlined
-                                  : Icons
-                                      .airline_seat_recline_extra_rounded,
+
+                              Icons.timer_outlined,
                             ),
                           ],
                         ),

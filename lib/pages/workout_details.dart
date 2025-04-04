@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:workouttracker/classes/workout_class.dart';
 import 'package:workouttracker/classes/workout_level_class.dart';
+import 'package:workouttracker/components/Mini/level_list_tile.dart';
+import 'package:workouttracker/pages/exercise_list_page.dart';
 
 class WorkoutDetails extends StatefulWidget {
   final Workout workout;
@@ -12,34 +14,6 @@ class WorkoutDetails extends StatefulWidget {
 }
 
 class _WorkoutDetailsState extends State<WorkoutDetails> {
-  String toUpperCase(String text) {
-    return text.toUpperCase();
-  }
-
-  int getTotalTime(WorkoutLevel level) {
-    int total = 0;
-    for (var exercise in level.exercises) {
-      total =
-          total +
-          int.parse(
-            (exercise.duration ?? 0 as num).toString(),
-          );
-    }
-    return total;
-  }
-
-  int getTotalLaps(WorkoutLevel level) {
-    int total = 0;
-    for (var exercise in level.exercises) {
-      total =
-          total +
-          int.parse(
-            (exercise.count ?? 0 as num).toString(),
-          );
-    }
-    return total;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,7 +75,7 @@ class _WorkoutDetailsState extends State<WorkoutDetails> {
                 crossAxisAlignment:
                     CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 60),
+                  SizedBox(height: 45),
                   Text(
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -119,13 +93,81 @@ class _WorkoutDetailsState extends State<WorkoutDetails> {
                     '( ${widget.workout.subtitle} )',
                   ),
                   SizedBox(height: 15),
-                  Text(
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16,
-                      color: Colors.grey.shade300,
-                    ),
-                    widget.workout.description,
+                  Stack(
+                    children: [
+                      Visibility(
+                        visible:
+                            widget
+                                .workout
+                                .description
+                                .length >=
+                            200,
+                        child: Container(
+                          height: 110,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Colors.transparent,
+                                const Color.fromARGB(
+                                  189,
+                                  0,
+                                  0,
+                                  0,
+                                ),
+                                const Color.fromARGB(
+                                  183,
+                                  0,
+                                  0,
+                                  0,
+                                ),
+                              ],
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              stops: [0, 0.9, 1],
+                            ),
+                          ),
+                          child: Column(
+                            mainAxisAlignment:
+                                MainAxisAlignment.end,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment
+                                        .center,
+                                children: [
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.only(
+                                          bottom: 2.0,
+                                        ),
+                                    child: Icon(
+                                      color: Colors.grey,
+                                      Icons
+                                          .keyboard_arrow_down_rounded,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 80,
+                        child: ListView(
+                          children: [
+                            Text(
+                              style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 16,
+                                color: Colors.grey.shade300,
+                              ),
+                              widget.workout.description,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(height: 30),
                   Row(
@@ -155,118 +197,23 @@ class _WorkoutDetailsState extends State<WorkoutDetails> {
                               const EdgeInsets.symmetric(
                                 vertical: 5.0,
                               ),
-                          child: InkWell(
-                            onTap: () {},
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.circular(
-                                      10,
-                                    ),
-                                color: const Color.fromARGB(
-                                  150,
-                                  0,
-                                  0,
-                                  0,
+                          child: LevelListTile(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (
+                                        context,
+                                      ) => ExerciseListPage(
+                                        workoutLevel: level,
+                                        workout:
+                                            widget.workout,
+                                      ),
                                 ),
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 20,
-                                vertical: 20,
-                              ),
-                              child: Row(
-                                spacing: 15,
-                                children: [
-                                  Icon(
-                                    color:
-                                        const Color.fromARGB(
-                                          200,
-                                          255,
-                                          193,
-                                          7,
-                                        ),
-                                    Icons.menu_open,
-                                  ),
-                                  Expanded(
-                                    child: Text(
-                                      style: TextStyle(
-                                        fontWeight:
-                                            FontWeight.w500,
-                                        color:
-                                            Colors
-                                                .grey
-                                                .shade300,
-                                      ),
-                                      toUpperCase(
-                                        level.level,
-                                      ),
-                                    ),
-                                  ),
-                                  Row(
-                                    spacing: 5,
-                                    children: [
-                                      Column(
-                                        children: [
-                                          Visibility(
-                                            visible:
-                                                convertSecondsToHours(
-                                                  getTotalTime(
-                                                    level,
-                                                  ),
-                                                ) !=
-                                                '0',
-                                            child: Text(
-                                              style: TextStyle(
-                                                fontWeight:
-                                                    FontWeight
-                                                        .w500,
-                                                color:
-                                                    Colors
-                                                        .grey
-                                                        .shade300,
-                                              ),
-                                              '${convertSecondsToHours(getTotalTime(level))} Mins',
-                                            ),
-                                          ),
-                                          Text(
-                                            style: TextStyle(
-                                              fontWeight:
-                                                  FontWeight
-                                                      .w500,
-                                              color:
-                                                  Colors
-                                                      .grey
-                                                      .shade300,
-                                            ),
-                                            '${getTotalLaps(level)} Laps',
-                                          ),
-                                        ],
-                                      ),
-                                      Icon(
-                                        color:
-                                            const Color.fromARGB(
-                                              200,
-                                              255,
-                                              193,
-                                              7,
-                                            ),
-                                        size: 18,
-                                        Icons.timer_sharp,
-                                      ),
-                                    ],
-                                  ),
-                                  Icon(
-                                    color:
-                                        Colors
-                                            .grey
-                                            .shade500,
-                                    size: 20,
-                                    Icons
-                                        .arrow_forward_ios_rounded,
-                                  ),
-                                ],
-                              ),
-                            ),
+                              );
+                            },
+                            level: level,
                           ),
                         );
                       },

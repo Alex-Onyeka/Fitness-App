@@ -1,8 +1,8 @@
 class Exercise {
   final String name;
-  final int? count;
+  // final int? count;
   final String description;
-  final int? duration;
+  final int duration;
   final String? image;
   bool isCompleted;
 
@@ -11,8 +11,8 @@ class Exercise {
     this.isCompleted = false,
     required this.description,
     this.image,
-    this.count,
-    this.duration,
+    // this.count,
+    required this.duration,
   });
 }
 
@@ -20,7 +20,7 @@ String convertSecondsToMinute(int seconds) {
   if (seconds < 60) {
     return seconds.toString();
   } else {
-    return '${seconds ~/ 60}min, ${(seconds % 60).toString().length > 1 ? (seconds % 60).toString().substring(0, 2) : addZeroOnSingleInt((seconds % 60).toString()).toString()}secs.';
+    return '${seconds ~/ 60}';
   }
 }
 

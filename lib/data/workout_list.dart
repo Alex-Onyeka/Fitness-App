@@ -32,14 +32,16 @@ List<Workout> workOutList = [
             name: 'Running',
             description:
                 'In your UI, you can load the image using Image.asset() or Image.network()',
-            count: 10,
+
+            duration: 300,
             image: 'assets/splash/splash_screen.jpg',
           ),
           Exercise(
             name: 'Jumping',
             description:
                 'In your UI, you can load the image using Image.asset() or Image.network()',
-            count: 15,
+
+            duration: 300,
             image: 'assets/splash/splash_screen2.jpg',
           ),
         ],
@@ -51,14 +53,16 @@ List<Workout> workOutList = [
             name: 'Running',
             description:
                 'In your UI, you can load the image using Image.asset() or Image.network()',
-            count: 10,
+
+            duration: 500,
             image: 'assets/splash/splash_screen4.jpg',
           ),
           Exercise(
             name: 'Jumping',
             description:
                 'In your UI, you can load the image using Image.asset() or Image.network()',
-            count: 20,
+
+            duration: 300,
             image: 'assets/splash/splash_screen.jpg',
           ),
         ],
@@ -69,15 +73,17 @@ List<Workout> workOutList = [
           Exercise(
             name: 'Running',
             description:
-                'In your UI, you can load the image using Image.asset() or Image.network()',
-            count: 10,
+                'In your UI, you can load the image using Image.asset() or Image.network(),',
+
+            duration: 300,
             image: 'assets/splash/splash_screen2.jpg',
           ),
           Exercise(
             name: 'Jumping',
             description:
                 'In your UI, you can load the image using Image.asset() or Image.network()',
-            count: 25,
+
+            duration: 700,
             image: 'assets/splash/splash_screen3.jpg',
           ),
         ],
@@ -90,7 +96,7 @@ List<Workout> workOutList = [
     subtitle: 'You can flip a widget',
     id: 2,
     description:
-        'In your UI, you can load the image using Image.asset() or Image.network()',
+        'In your UI, you can load the image using Image.asset() or Image.network(),In your UI, you can load the image using Image.asset() or Image.network(),In your UI, you can load the image using Image.asset() or Image.network(),In your UI, you can load the image using Image.asset() or Image.network(),In your UI, you can load the image using Image.asset() or Image.network(),In your UI, you can load the image using Image.asset() or Image.network(),In your UI, you can load the image using Image.asset() or Image.network(),In your UI, you can load the image using Image.asset() or Image.network(),In your UI, you can load the image using Image.asset() or Image.network(),In your UI, you can load the image using Image.asset() or Image.network(),In your UI, you can load the image using Image.asset() or Image.network(),In your UI, you can load the image using Image.asset() or Image.network(),In your UI, you can load the image using Image.asset() or Image.network(),In your UI, you can load the image using Image.asset() or Image.network(), ',
     level: [
       WorkoutLevel(
         level: beginnerLevel,
@@ -99,7 +105,8 @@ List<Workout> workOutList = [
             name: 'Sit Up',
             description:
                 'In your UI, you can load the image using Image.asset() or Image.network()',
-            count: 10,
+
+            duration: 3500,
             image: 'assets/splash/splash_screen4.jpg',
           ),
           Exercise(
@@ -118,7 +125,8 @@ List<Workout> workOutList = [
             name: 'Sit Up',
             description:
                 'In your UI, you can load the image using Image.asset() or Image.network()',
-            count: 15,
+
+            duration: 300,
             image: 'assets/splash/splash_screen.jpg',
           ),
           Exercise(
@@ -137,7 +145,7 @@ List<Workout> workOutList = [
             name: 'Sit Up',
             description:
                 'In your UI, you can load the image using Image.asset() or Image.network()',
-            count: 20,
+            duration: 84000,
             image: 'assets/splash/splash_screen2.jpg',
           ),
           Exercise(
