@@ -33,7 +33,7 @@ List<Workout> workOutList = [
             description:
                 'In your UI, you can load the image using Image.asset() or Image.network()',
 
-            duration: 300,
+            duration: 10,
             image: 'assets/splash/splash_screen.jpg',
           ),
           Exercise(
@@ -41,7 +41,7 @@ List<Workout> workOutList = [
             description:
                 'In your UI, you can load the image using Image.asset() or Image.network()',
 
-            duration: 300,
+            duration: 250,
             image: 'assets/splash/splash_screen2.jpg',
           ),
         ],
@@ -75,7 +75,7 @@ List<Workout> workOutList = [
             description:
                 'In your UI, you can load the image using Image.asset() or Image.network(),',
 
-            duration: 300,
+            duration: 900,
             image: 'assets/splash/splash_screen2.jpg',
           ),
           Exercise(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workouttracker/classes/exercise_class.dart';
+import 'package:workouttracker/classes/workout_class.dart';
 
 class ExerciseListTile extends StatefulWidget {
   final Function()? onTap;
@@ -28,8 +29,8 @@ class _ExerciseListTileState
       child: Container(
         height: 80,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: const Color.fromARGB(150, 0, 0, 0),
+          borderRadius: BorderRadius.circular(7),
+          color: const Color.fromARGB(180, 0, 0, 0),
         ),
         padding: EdgeInsets.symmetric(
           horizontal: 20,
@@ -39,14 +40,25 @@ class _ExerciseListTileState
           spacing: 15,
           children: [
             Icon(
-              color: const Color.fromARGB(200, 255, 193, 7),
+              color:
+                  widget.exercise.isCompleted
+                      ? Colors.grey.shade700
+                      : const Color.fromARGB(
+                        200,
+                        255,
+                        193,
+                        7,
+                      ),
               Icons.menu_open,
             ),
             Expanded(
               child: Text(
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
-                  color: Colors.grey.shade300,
+                  color:
+                      widget.exercise.isCompleted
+                          ? Colors.grey.shade600
+                          : Colors.grey.shade300,
                 ),
                 toUpperCase(widget.exercise.name),
               ),
@@ -57,22 +69,40 @@ class _ExerciseListTileState
                 Text(
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
-                    color: Colors.grey.shade300,
+                    color:
+                        widget.exercise.isCompleted
+                            ? Colors.grey.shade600
+                            : Colors.grey.shade300,
                   ),
-                  '${widget.exercise.duration}',
+                  convertSecondsToDays(
+                    widget.exercise.duration,
+                  ),
                 ),
               ],
             ),
             Icon(
-              color: const Color.fromARGB(200, 255, 193, 7),
+              color:
+                  widget.exercise.isCompleted
+                      ? Colors.grey.shade700
+                      : const Color.fromARGB(
+                        200,
+                        255,
+                        193,
+                        7,
+                      ),
               size: 18,
               Icons.timer_sharp,
             ),
 
             Icon(
-              color: Colors.grey.shade500,
+              color:
+                  widget.exercise.isCompleted
+                      ? Colors.grey.shade700
+                      : Colors.grey.shade500,
               size: 20,
-              Icons.arrow_forward_ios_rounded,
+              widget.exercise.isCompleted
+                  ? Icons.check_box_outlined
+                  : Icons.check_box_outline_blank,
             ),
           ],
         ),
