@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:workouttracker/classes/exercise_class.dart';
 import 'package:workouttracker/classes/workout_class.dart';
 import 'package:workouttracker/classes/workout_level_class.dart';
 import 'package:workouttracker/components/Mini/exercise_list_tile.dart';
@@ -32,9 +33,19 @@ class _ExerciseListPageState
         // loadNextExercise(level);
         finishExercise(level, currentIndex);
         setState(() {
-          currentIndex++;
-          countDownTimer =
-              level.exercises[currentIndex].duration;
+          if (currentIndex ==
+              level.exercises.indexOf(
+                level.exercises.last,
+              )) {
+            return;
+          } else {
+            currentIndex++;
+            countDownTimer =
+                level.exercises[currentIndex].duration;
+            numbers = convertSecondsToMinuteList(
+              countDownTimer,
+            );
+          }
         });
 
         ScaffoldMessenger.of(context).showSnackBar(
@@ -43,6 +54,9 @@ class _ExerciseListPageState
       } else {
         setState(() {
           countDownTimer--;
+          numbers = convertSecondsToMinuteList(
+            countDownTimer,
+          );
         });
       }
     });
@@ -54,6 +68,7 @@ class _ExerciseListPageState
   void finishExercise(WorkoutLevel level, int index) {
     level.exercises[index].isCompleted = true;
   }
+
   //
   //
   // void loadNextExercise(WorkoutLevel level) {
@@ -63,6 +78,23 @@ class _ExerciseListPageState
   //         level.exercises[currentIndex - 1].duration;
   //   });
   // }
+  List numbers = [];
+  void setList() {
+    if (widget.workoutLevel.exercises.last.isCompleted !=
+        true) {
+      numbers.addAll(
+        convertSecondsToMinuteList(
+          widget.workoutLevel.exercises
+              .firstWhere(
+                (element) => element.isCompleted == false,
+              )
+              .duration,
+        ),
+      );
+    } else {
+      numbers.addAll(['0', '0']);
+    }
+  }
 
   //
   //
@@ -75,9 +107,19 @@ class _ExerciseListPageState
   void initState() {
     super.initState();
     setState(() {
-      countDownTimer =
-          widget.workoutLevel.exercises[0].duration;
+      if (widget.workoutLevel.exercises.last.isCompleted !=
+          true) {
+        countDownTimer =
+            widget.workoutLevel.exercises
+                .firstWhere(
+                  (element) => element.isCompleted == false,
+                )
+                .duration;
+      } else {
+        countDownTimer = 0;
+      }
     });
+    setList();
   }
 
   @override
@@ -193,21 +235,95 @@ class _ExerciseListPageState
                               Icons.timer_outlined,
                             ),
                           ),
-                          Text(
-                            style: TextStyle(
-                              color: Colors.grey.shade300,
-                              fontSize: 80,
-                              fontWeight: FontWeight.bold,
-                              shadows: [
-                                Shadow(
-                                  blurRadius: 10,
-                                  color: Colors.black,
-                                  offset: Offset(0, 0),
+                          numbers.length > 1
+                              ? Row(
+                                crossAxisAlignment:
+                                    CrossAxisAlignment
+                                        .start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment
+                                        .center,
+                                children: [
+                                  Text(
+                                    style: TextStyle(
+                                      color:
+                                          Colors
+                                              .grey
+                                              .shade300,
+                                      fontSize: 80,
+                                      fontWeight:
+                                          FontWeight.bold,
+                                      shadows: [
+                                        Shadow(
+                                          blurRadius: 10,
+                                          color:
+                                              Colors.black,
+                                          offset: Offset(
+                                            0,
+                                            0,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    numbers[0],
+                                  ),
+                                  Text(
+                                    style: TextStyle(
+                                      color:
+                                          Colors
+                                              .grey
+                                              .shade300,
+                                      fontSize: 16,
+                                      fontWeight:
+                                          FontWeight.bold,
+                                      shadows: [
+                                        Shadow(
+                                          blurRadius: 10,
+                                          color:
+                                              Colors.black,
+                                          offset: Offset(
+                                            0,
+                                            0,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    numbers[1],
+                                  ),
+                                ],
+                              )
+                              : Text(
+                                style: TextStyle(
+                                  color:
+                                      Colors.grey.shade300,
+                                  fontSize: 80,
+                                  fontWeight:
+                                      FontWeight.bold,
+                                  shadows: [
+                                    Shadow(
+                                      blurRadius: 10,
+                                      color: Colors.black,
+                                      offset: Offset(0, 0),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                            countDownTimer.toString(),
-                          ),
+                                numbers[0],
+                              ),
+                          // Text(
+                          //   style: TextStyle(
+                          //     color: Colors.grey.shade300,
+                          //     fontSize: 80,
+                          //     fontWeight: FontWeight.bold,
+                          //     shadows: [
+                          //       Shadow(
+                          //         blurRadius: 10,
+                          //         color: Colors.black,
+                          //         offset: Offset(0, 0),
+                          //       ),
+                          //     ],
+                          //   ),
+                          //   countDownTimer.toString(),
+                          // ),
                         ],
                       ),
                     ],

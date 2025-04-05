@@ -21,12 +21,12 @@ class _SingleExercisePageState
   //
   //
   //
-  void startWorkOut(Exercise exercise) {
+  void startWorkOut() {
     Timer.periodic(Duration(seconds: 1), (timer) {
       if (countDownTimer < 1) {
         timer.cancel();
         // loadNextExercise(level);
-        finishExercise(exercise);
+        finishExercise();
         setState(() {
           countDownTimer = 0;
         });
@@ -41,7 +41,6 @@ class _SingleExercisePageState
             countDownTimer,
           );
         });
-        print(numbers);
       }
     });
   }
@@ -49,8 +48,10 @@ class _SingleExercisePageState
   //
   //
 
-  void finishExercise(Exercise exercise) {
-    exercise.isCompleted = true;
+  void finishExercise() {
+    setState(() {
+      isFinished = true;
+    });
   }
 
   //
@@ -72,6 +73,7 @@ class _SingleExercisePageState
   //
   //
   //
+  bool isFinished = false;
   int countDownTimer = 0;
 
   @override
@@ -81,7 +83,6 @@ class _SingleExercisePageState
       countDownTimer = widget.exercise.duration;
     });
     setList();
-    print(numbers);
   }
 
   @override
@@ -279,11 +280,9 @@ class _SingleExercisePageState
                     children: [
                       InkWell(
                         onTap: () {
-                          widget.exercise.isCompleted
+                          isFinished
                               ? Navigator.of(context).pop()
-                              : startWorkOut(
-                                widget.exercise,
-                              );
+                              : startWorkOut();
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(
@@ -301,8 +300,8 @@ class _SingleExercisePageState
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600,
                               ),
-                              widget.exercise.isCompleted
-                                  ? 'Finish Now'
+                              isFinished
+                                  ? 'Go back'
                                   : 'Start Now!',
                             ),
                           ),

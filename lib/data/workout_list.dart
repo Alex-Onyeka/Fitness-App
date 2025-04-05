@@ -41,7 +41,7 @@ List<Workout> workOutList = [
             description:
                 'In your UI, you can load the image using Image.asset() or Image.network()',
 
-            duration: 250,
+            duration: 5,
             image: 'assets/splash/splash_screen2.jpg',
           ),
         ],
