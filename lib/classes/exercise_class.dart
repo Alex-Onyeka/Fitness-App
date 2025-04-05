@@ -24,6 +24,14 @@ String convertSecondsToMinute(int seconds) {
   }
 }
 
+List convertSecondsToMinuteList(int seconds) {
+  if (seconds < 60) {
+    return [seconds.toString()];
+  } else {
+    return ['${seconds ~/ 60}', '${seconds % 60}'];
+  }
+}
+
 int convertMinutesToSeconds(int minutes) {
   return minutes * 60;
 }

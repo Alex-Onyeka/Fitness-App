@@ -5,6 +5,7 @@ import 'package:workouttracker/components/main/ad_banner.dart';
 import 'package:workouttracker/components/main/exercise_container.dart';
 import 'package:workouttracker/data/workout_data.dart';
 import 'package:workouttracker/pages/general_exercise_page.dart';
+import 'package:workouttracker/pages/single_exercise_page.dart';
 import 'package:workouttracker/pages/workout_list_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -254,7 +255,18 @@ class _HomePageState extends State<HomePage> {
                       horizontal: 10.0,
                     ),
                     child: ExerciseContainer(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return SingleExercisePage(
+                                exercise: currentExercise,
+                              );
+                            },
+                          ),
+                        );
+                      },
                       exercise: currentExercise,
                     ),
                   );

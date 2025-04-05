@@ -101,7 +101,7 @@ class _ExerciseListTileState
                       : Colors.grey.shade500,
               size: 20,
               widget.exercise.isCompleted
-                  ? Icons.check_box_outlined
+                  ? Icons.check
                   : Icons.check_box_outline_blank,
             ),
           ],

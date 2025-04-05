@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:workouttracker/classes/exercise_class.dart';
 import 'package:workouttracker/components/main/exercise_container.dart';
 import 'package:workouttracker/data/workout_data.dart';
+import 'package:workouttracker/pages/single_exercise_page.dart';
 
 class GeneralExercisePage extends StatefulWidget {
   const GeneralExercisePage({super.key});
@@ -162,7 +163,18 @@ class _GeneralExercisePageState
               children:
                   exercises.map((exercise) {
                     return ExerciseContainer(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return SingleExercisePage(
+                                exercise: exercise,
+                              );
+                            },
+                          ),
+                        );
+                      },
                       exercise: exercise,
                     );
                   }).toList(),
