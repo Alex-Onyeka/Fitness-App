@@ -1,10 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:workouttracker/classes/exercise_class.dart';
 import 'package:workouttracker/classes/workout_class.dart';
 import 'package:workouttracker/classes/workout_level_class.dart';
 import 'package:workouttracker/components/Mini/exercise_list_tile.dart';
+import 'package:workouttracker/provider/progress_indicator_provider.dart';
 
 class ExerciseListPage extends StatefulWidget {
   final Workout workout;
@@ -22,6 +24,7 @@ class ExerciseListPage extends StatefulWidget {
 
 class _ExerciseListPageState
     extends State<ExerciseListPage> {
+  String loaderNumber = '0';
   //
   //
   //
@@ -206,135 +209,174 @@ class _ExerciseListPageState
                     mainAxisAlignment:
                         MainAxisAlignment.center,
                     children: [
-                      Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(
-                                73,
-                                0,
-                                0,
-                                0,
-                              ),
-                              borderRadius:
-                                  BorderRadius.circular(
-                                    100,
-                                  ),
+                      // Stack(
+                      //   alignment: Alignment.center,
+                      //   children: [
+                      //     Container(
+                      //       decoration: BoxDecoration(
+                      //         color: const Color.fromARGB(
+                      //           73,
+                      //           0,
+                      //           0,
+                      //           0,
+                      //         ),
+                      //         borderRadius:
+                      //             BorderRadius.circular(
+                      //               100,
+                      //             ),
+                      //       ),
+                      //       height: 200,
+                      //       width: 200,
+                      //       child: Icon(
+                      //         size: 150,
+                      //         color: const Color.fromARGB(
+                      //           45,
+                      //           255,
+                      //           193,
+                      //           7,
+                      //         ),
+                      //         Icons.timer_outlined,
+                      //       ),
+                      //     ),
+                      //     numbers.length > 1
+                      //         ? Row(
+                      //           crossAxisAlignment:
+                      //               CrossAxisAlignment
+                      //                   .start,
+                      //           mainAxisAlignment:
+                      //               MainAxisAlignment
+                      //                   .center,
+                      //           children: [
+                      //             Text(
+                      //               style: TextStyle(
+                      //                 color:
+                      //                     Colors
+                      //                         .grey
+                      //                         .shade300,
+                      //                 fontSize: 80,
+                      //                 fontWeight:
+                      //                     FontWeight.bold,
+                      //                 shadows: [
+                      //                   Shadow(
+                      //                     blurRadius: 10,
+                      //                     color:
+                      //                         Colors.black,
+                      //                     offset: Offset(
+                      //                       0,
+                      //                       0,
+                      //                     ),
+                      //                   ),
+                      //                 ],
+                      //               ),
+                      //               numbers[0],
+                      //             ),
+                      //             Text(
+                      //               style: TextStyle(
+                      //                 color:
+                      //                     Colors
+                      //                         .grey
+                      //                         .shade300,
+                      //                 fontSize: 16,
+                      //                 fontWeight:
+                      //                     FontWeight.bold,
+                      //                 shadows: [
+                      //                   Shadow(
+                      //                     blurRadius: 10,
+                      //                     color:
+                      //                         Colors.black,
+                      //                     offset: Offset(
+                      //                       0,
+                      //                       0,
+                      //                     ),
+                      //                   ),
+                      //                 ],
+                      //               ),
+                      //               numbers[1],
+                      //             ),
+                      //           ],
+                      //         )
+                      //         : Text(
+                      //           style: TextStyle(
+                      //             color:
+                      //                 Colors.grey.shade300,
+                      //             fontSize: 80,
+                      //             fontWeight:
+                      //                 FontWeight.bold,
+                      //             shadows: [
+                      //               Shadow(
+                      //                 blurRadius: 10,
+                      //                 color: Colors.black,
+                      //                 offset: Offset(0, 0),
+                      //               ),
+                      //             ],
+                      //           ),
+                      //           numbers[0],
+                      //         ),
+                      // value between 0.0 to 1.0
+                      Center(
+                        child: SizedBox(
+                          width: 100,
+                          height: 100,
+                          child: CircularProgressIndicator(
+                            value: double.parse(
+                              Provider.of<
+                                ProgressIndicatorProvider
+                              >(context).number,
                             ),
-                            height: 200,
-                            width: 200,
-                            child: Icon(
-                              size: 150,
-                              color: const Color.fromARGB(
-                                45,
-                                255,
-                                193,
-                                7,
-                              ),
-                              Icons.timer_outlined,
-                            ),
+                            strokeWidth: 6,
+                            valueColor:
+                                AlwaysStoppedAnimation<
+                                  Color
+                                >(Colors.blueAccent),
+                            backgroundColor:
+                                Colors.grey[300],
                           ),
-                          numbers.length > 1
-                              ? Row(
-                                crossAxisAlignment:
-                                    CrossAxisAlignment
-                                        .start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment
-                                        .center,
-                                children: [
-                                  Text(
-                                    style: TextStyle(
-                                      color:
-                                          Colors
-                                              .grey
-                                              .shade300,
-                                      fontSize: 80,
-                                      fontWeight:
-                                          FontWeight.bold,
-                                      shadows: [
-                                        Shadow(
-                                          blurRadius: 10,
-                                          color:
-                                              Colors.black,
-                                          offset: Offset(
-                                            0,
-                                            0,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    numbers[0],
-                                  ),
-                                  Text(
-                                    style: TextStyle(
-                                      color:
-                                          Colors
-                                              .grey
-                                              .shade300,
-                                      fontSize: 16,
-                                      fontWeight:
-                                          FontWeight.bold,
-                                      shadows: [
-                                        Shadow(
-                                          blurRadius: 10,
-                                          color:
-                                              Colors.black,
-                                          offset: Offset(
-                                            0,
-                                            0,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    numbers[1],
-                                  ),
-                                ],
-                              )
-                              : Text(
-                                style: TextStyle(
-                                  color:
-                                      Colors.grey.shade300,
-                                  fontSize: 80,
-                                  fontWeight:
-                                      FontWeight.bold,
-                                  shadows: [
-                                    Shadow(
-                                      blurRadius: 10,
-                                      color: Colors.black,
-                                      offset: Offset(0, 0),
-                                    ),
-                                  ],
-                                ),
-                                numbers[0],
-                              ),
-                          // Text(
-                          //   style: TextStyle(
-                          //     color: Colors.grey.shade300,
-                          //     fontSize: 80,
-                          //     fontWeight: FontWeight.bold,
-                          //     shadows: [
-                          //       Shadow(
-                          //         blurRadius: 10,
-                          //         color: Colors.black,
-                          //         offset: Offset(0, 0),
-                          //       ),
-                          //     ],
-                          //   ),
-                          //   countDownTimer.toString(),
-                          // ),
-                        ],
+                        ),
                       ),
+                      SizedBox(height: 15),
+                      // Text(
+                      //   style: TextStyle(
+                      //     color: Colors.grey.shade300,
+                      //     fontSize: 80,
+                      //     fontWeight: FontWeight.bold,
+                      //     shadows: [
+                      //       Shadow(
+                      //         blurRadius: 10,
+                      //         color: Colors.black,
+                      //         offset: Offset(0, 0),
+                      //       ),
+                      //     ],
+                      //   ),
+                      //   Provider.of<
+                      //     ProgressIndicatorProvider
+                      //   >(context).number.toString(),
+                      // ),
+                      //   ],
+                      // ),
                     ],
                   ),
+                  SizedBox(height: 20),
                   Row(
                     mainAxisAlignment:
                         MainAxisAlignment.center,
                     children: [
                       InkWell(
                         onTap: () {
-                          startWorkOut(widget.workoutLevel);
+                          // widget
+                          //         .workoutLevel
+                          //         .exercises
+                          //         .last
+                          //         .isCompleted
+                          //     ? Navigator.of(context).pop()
+                          //     : startWorkOut(
+                          //       widget.workoutLevel,
+                          //     );
+                          Provider.of<
+                            ProgressIndicatorProvider
+                          >(
+                            context,
+                            listen: false,
+                          ).increaseTimer(0, 100);
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(
@@ -352,7 +394,13 @@ class _ExerciseListPageState
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600,
                               ),
-                              'Start Now!',
+                              widget
+                                      .workoutLevel
+                                      .exercises
+                                      .last
+                                      .isCompleted
+                                  ? 'Go back'
+                                  : 'Start Now!',
                             ),
                           ),
                         ),
