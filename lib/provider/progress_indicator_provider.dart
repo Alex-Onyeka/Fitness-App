@@ -8,7 +8,6 @@ class ProgressIndicatorProvider extends ChangeNotifier {
     Timer.periodic(Duration(milliseconds: 80), (timer) {
       if (startTime > stopTime) {
         timer.cancel();
-        print('Timer Finished');
       } else {
         double firstNum = (10 / (stopTime * 10));
         (firstNum * startTime++).toString().length > 2
