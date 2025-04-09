@@ -34,4 +34,4 @@ Contributions are welcome! To contribute:
 
 ### Contact:
 
-For any inquiries, reach out via [Email](mailto:alexonyekasm@email.com).
+For any inquiries, reach out via [Email](mailto:alexonyekasm@email.com)
